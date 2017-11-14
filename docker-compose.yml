@@ -1,0 +1,33 @@
+version: "3.4"
+
+services:
+  app:
+    image: anthonyporthouse/rss:latest
+
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+
+    ports:
+      - "1234:1234"
+
+    restart: always
+
+    depends_on:
+      - db
+
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: rss
+      DB_NAME: rss
+      DB_PASS: password
+
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rss
+      MYSQL_USER: rss
+      MYSQL_PASSWORD: password
