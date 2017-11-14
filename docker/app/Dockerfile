@@ -4,11 +4,11 @@ RUN apk --no-cache --update add git openssh
 
 RUN go get -u github.com/golang/dep/cmd/dep
 
-WORKDIR /go/src/app
+WORKDIR /go/src/api
 
-COPY ./src/app /go/src/app
+COPY ./src/api /go/src/api
 
-RUN dep ensure
+RUN dep ensure --vendor-only
 
 RUN go install
 

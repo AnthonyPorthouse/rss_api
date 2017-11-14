@@ -1,8 +1,8 @@
 version: "3.4"
 
 services:
-  app:
-    image: anthonyporthouse/rss:latest
+  api:
+    image: anthonyporthouse/rss_api:latest
 
     build:
       context: .
