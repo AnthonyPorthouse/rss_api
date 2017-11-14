@@ -2,6 +2,7 @@ package domain
 
 import (
 	"api/database"
+	"log"
 	"time"
 )
 
@@ -12,13 +13,24 @@ type Feed struct {
 	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
 }
 
-type Feeds []*Feed
+type Feeds []Feed
 
-func GetAllFeeds() *Feeds {
+func GetAllFeeds(limit int, after string) Feeds {
 	db := database.GetDB()
 
-	var feeds *Feeds
-	db.Select(&feeds, "SELECT * FROM feeds")
+	feeds := make(Feeds, 0)
+	err := db.Select(&feeds, `
+		SELECT *
+		FROM feeds
+		WHERE id > ?
+
+		ORDER BY created_at DESC
+		LIMIT ?
+	`, after, limit)
+
+	if err != nil {
+		log.Println(err)
+	}
 
 	return feeds
 }
