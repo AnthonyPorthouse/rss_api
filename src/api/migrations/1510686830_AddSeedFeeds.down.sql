@@ -1,0 +1,5 @@
+BEGIN;
+
+DELETE FROM feeds WHERE id IN ("a7b07ca4-d8a3-40ad-8854-d37388e8d7d4", "30f50d65-66ed-49a0-9822-1e4d77a7c462");
+
+COMMIT;
