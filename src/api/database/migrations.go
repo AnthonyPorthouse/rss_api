@@ -29,8 +29,9 @@ func migrateDB() {
 	fmt.Println("Migrating DB")
 
 	err = m.Up()
+
 	if err != nil {
-		log.Panic(err)
+		log.Println(err)
 	}
 
 	fmt.Println("Migrated DB")

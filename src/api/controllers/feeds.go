@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"api/domain"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo"
@@ -9,9 +11,13 @@ import (
 func MapFeedRoutes(e *echo.Echo) {
 	group := e.Group("/feeds")
 
-	group.GET("/", getAllFeeds).Name = "feeds.index"
+	group.GET("", getAllFeeds).Name = "feeds.index"
 }
 
 func getAllFeeds(c echo.Context) error {
-	return c.String(http.StatusOK, "")
+	feeds := domain.GetAllFeeds()
+
+	fmt.Printf("%+v\n", feeds)
+
+	return c.JSON(http.StatusOK, feeds)
 }

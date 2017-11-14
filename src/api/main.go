@@ -2,6 +2,7 @@ package main
 
 import (
 	"api/controllers"
+	"net/http"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -10,6 +11,10 @@ import (
 func main() {
 	e := echo.New()
 	e.HideBanner = true
+	e.Pre(middleware.RemoveTrailingSlashWithConfig(middleware.TrailingSlashConfig{
+		RedirectCode: http.StatusMovedPermanently,
+	}))
+
 	e.Use(middleware.Logger())
 
 	controllers.MapBaseRoutes(e)
