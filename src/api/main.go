@@ -2,6 +2,7 @@ package main
 
 import (
 	"api/controllers"
+	"api/database"
 	"net/http"
 
 	"github.com/labstack/echo"
@@ -9,6 +10,8 @@ import (
 )
 
 func main() {
+	database.MigrateDB()
+
 	e := echo.New()
 	e.HideBanner = true
 	e.Pre(middleware.RemoveTrailingSlashWithConfig(middleware.TrailingSlashConfig{

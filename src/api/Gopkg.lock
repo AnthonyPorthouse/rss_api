@@ -14,6 +14,12 @@
   version = "v1.3"
 
 [[projects]]
+  name = "github.com/guregu/null"
+  packages = ["."]
+  revision = "5d2d1e5a9e25088fb9cc0b0f7cb566250eb42bba"
+  version = "v3.2.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/jmoiron/sqlx"
   packages = [".","reflectx"]
@@ -39,7 +45,7 @@
 
 [[projects]]
   name = "github.com/mattes/migrate"
-  packages = [".","database","source","source/file"]
+  packages = [".","database","database/mysql","source","source/file"]
   revision = "035c07716cd373d88456ec4d701402df52584cb4"
   version = "v3.0.1"
 
@@ -82,6 +88,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "63c4d17b18cbeab39ce542ece7694151c5d29f74a7db42d5d33bcc1ceda456f0"
+  inputs-digest = "e1311a0cc9721b19eedefedd3558da7187b5ed65b755630746fb781166b838c7"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"api/domain"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -19,9 +18,14 @@ func getAllFeeds(c echo.Context) error {
 	limit, _ := strconv.Atoi(c.QueryParam("limit"))
 	after := c.QueryParam("after")
 
-	feeds := domain.GetAllFeeds(limit, after)
+	if limit <= 0 {
+		limit = 10
+	}
+	if limit > 50 {
+		limit = 50
+	}
 
-	fmt.Printf("%+v\n", feeds)
+	feeds := domain.GetAllFeeds(limit, after)
 
 	return c.JSON(http.StatusOK, feeds)
 }

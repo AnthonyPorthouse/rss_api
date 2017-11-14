@@ -34,6 +34,8 @@ func initDB() {
 			config.DbPort,
 		),
 		MultiStatements: true,
+		ParseTime:       true,
+		Strict:          true,
 	}
 
 	attempt := 0
@@ -59,6 +61,4 @@ func initDB() {
 			log.Println("Connected to DB")
 		}
 	}
-
-	migrateDB()
 }

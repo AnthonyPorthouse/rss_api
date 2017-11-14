@@ -4,13 +4,15 @@ import (
 	"api/database"
 	"log"
 	"time"
+
+	"github.com/guregu/null"
 )
 
 type Feed struct {
 	ID        string    `db:"id" json:"id"`
 	URL       string    `db:"url" json:"url"`
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
-	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
+	UpdatedAt null.Time `db:"updated_at" json:"updated_at"`
 }
 
 type Feeds []Feed
@@ -18,7 +20,7 @@ type Feeds []Feed
 func GetAllFeeds(limit int, after string) Feeds {
 	db := database.GetDB()
 
-	feeds := make(Feeds, 0)
+	feeds := make(Feeds, 0, limit)
 	err := db.Select(&feeds, `
 		SELECT *
 		FROM feeds

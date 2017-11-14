@@ -10,7 +10,7 @@ import (
 	_ "github.com/mattes/migrate/source/file"
 )
 
-func migrateDB() {
+func MigrateDB() {
 	driver, err := migrateMysql.WithInstance(GetDB().DB, &migrateMysql.Config{})
 	if err != nil {
 		log.Panic(err)
