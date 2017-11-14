@@ -1,4 +1,4 @@
-package main
+package database
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 )
 
 func migrateDB() {
-	driver, err := migrateMysql.WithInstance(getDB().DB, &migrateMysql.Config{})
+	driver, err := migrateMysql.WithInstance(GetDB().DB, &migrateMysql.Config{})
 	if err != nil {
 		log.Panic(err)
 	}

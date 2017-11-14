@@ -1,6 +1,7 @@
-package main
+package database
 
 import (
+	"api/config"
 	"fmt"
 	"log"
 	"time"
@@ -11,20 +12,26 @@ import (
 
 var db *sqlx.DB
 
-func getDB() *sqlx.DB {
+func GetDB() *sqlx.DB {
+	if db == nil {
+		initDB()
+	}
+
 	return db
 }
 
 func initDB() {
-	config := mysql.Config{
-		User:   Config.DbUsername,
-		Passwd: Config.DbPassword,
-		DBName: Config.DbName,
+	config := config.GetConfig()
+
+	c := mysql.Config{
+		User:   config.DbUsername,
+		Passwd: config.DbPassword,
+		DBName: config.DbName,
 		Net:    "tcp",
 		Addr: fmt.Sprintf(
 			"%s:%s",
-			Config.DbHost,
-			Config.DbPort,
+			config.DbHost,
+			config.DbPort,
 		),
 		MultiStatements: true,
 	}
@@ -37,7 +44,7 @@ func initDB() {
 
 		log.Println("Attempting to connect to DB:", attempt)
 
-		db, err = sqlx.Connect("mysql", config.FormatDSN())
+		db, err = sqlx.Connect("mysql", c.FormatDSN())
 
 		if err != nil && attempt == 10 {
 			log.Panicln("Failed to connect to DB:", err)

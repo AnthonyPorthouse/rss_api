@@ -1,8 +1,16 @@
-package main
+package config
 
-import "os"
+import (
+	"os"
 
-import _ "github.com/joho/godotenv/autoload"
+	_ "github.com/joho/godotenv/autoload"
+)
+
+var Config = loadConfig()
+
+func GetConfig() *Configuration {
+	return Config
+}
 
 type Configuration struct {
 	DbUsername string
@@ -12,9 +20,9 @@ type Configuration struct {
 	DbPort     string
 }
 
-func loadConfig() Configuration {
+func loadConfig() *Configuration {
 
-	return Configuration{
+	return &Configuration{
 		DbUsername: os.Getenv("DB_USER"),
 		DbPassword: os.Getenv("DB_PASS"),
 		DbName:     os.Getenv("DB_NAME"),
@@ -22,5 +30,3 @@ func loadConfig() Configuration {
 		DbPort:     os.Getenv("DB_PORT"),
 	}
 }
-
-var Config = loadConfig()
