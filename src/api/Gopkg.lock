@@ -38,6 +38,12 @@
   version = "0.2.3"
 
 [[projects]]
+  name = "github.com/mattes/migrate"
+  packages = [".","database","source","source/file"]
+  revision = "035c07716cd373d88456ec4d701402df52584cb4"
+  version = "v3.0.1"
+
+[[projects]]
   name = "github.com/mattn/go-colorable"
   packages = ["."]
   revision = "167de6bfdfba052fa6b2d3664c8f5272e23c9072"
@@ -65,17 +71,17 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["acme","acme/autocert"]
-  revision = "6a293f2d4b14b8e6d3f0539e383f6d0d30fce3fd"
+  revision = "9f005a07e0d31d45e6656d241bb5c0f2efd4bc94"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "1e2299c37cc91a509f1b12369872d27be0ce98a6"
+  revision = "665f6529cca930e27b831a0d1dafffbe1c172924"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a58c9a3925035d7856695952d203da9be185a8d984d96272db37a13cbfdcfb2e"
+  inputs-digest = "63c4d17b18cbeab39ce542ece7694151c5d29f74a7db42d5d33bcc1ceda456f0"
   solver-name = "gps-cdcl"
   solver-version = 1
