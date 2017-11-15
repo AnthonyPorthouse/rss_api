@@ -1,12 +1,27 @@
 version: "3.4"
 
 services:
+  app:
+    image: anthonyporthouse/rss_app:latest
+
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+
+    ports:
+      - "8080:1234"
+
+    restart: always
+
+    depends_on:
+      - api
+
   api:
     image: anthonyporthouse/rss_api:latest
 
     build:
       context: .
-      dockerfile: docker/app/Dockerfile
+      dockerfile: docker/api/Dockerfile
 
     ports:
       - "1234:1234"

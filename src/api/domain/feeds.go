@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/guregu/null"
-	uuid "github.com/satori/go.uuid"
+	"github.com/satori/go.uuid"
 )
 
 type Feed struct {
