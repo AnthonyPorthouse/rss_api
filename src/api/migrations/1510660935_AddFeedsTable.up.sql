@@ -8,7 +8,8 @@ CREATE TABLE `feeds`
   created_at DATETIME NOT NULL,
   updated_at DATETIME,
 
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  UNIQUE KEY url (`url`)
 );
 
 COMMIT;

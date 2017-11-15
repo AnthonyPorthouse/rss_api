@@ -9,9 +9,21 @@ import (
 )
 
 func MapFeedRoutes(e *echo.Echo) {
-	group := e.Group("/feeds")
+	feeds := e.Group("/feeds")
 
-	group.GET("", getAllFeeds).Name = "feeds.index"
+	feeds.GET("", getAllFeeds).Name = "feeds.index"
+	feeds.POST("", addFeed).Name = "feeds.create"
+	feeds.GET("/:id", getFeed).Name = "feeds.read"
+}
+
+func getFeed(c echo.Context) error {
+	feed := domain.GetFeed(c.Param("id"))
+
+	if feed == nil {
+		return c.NoContent(http.StatusNotFound)
+	}
+
+	return c.JSON(http.StatusOK, feed)
 }
 
 func getAllFeeds(c echo.Context) error {
@@ -28,4 +40,16 @@ func getAllFeeds(c echo.Context) error {
 	feeds := domain.GetAllFeeds(limit, after)
 
 	return c.JSON(http.StatusOK, feeds)
+}
+
+func addFeed(c echo.Context) (err error) {
+	var feed *domain.Feed
+
+	if err = c.Bind(feed); err != nil {
+		return
+	}
+
+	feed = domain.CreateFeed(*feed)
+
+	return c.JSON(http.StatusCreated, feed)
 }

@@ -13,7 +13,7 @@ func main() {
 	database.MigrateDB()
 
 	e := echo.New()
-	e.HideBanner = true
+
 	e.Pre(middleware.RemoveTrailingSlashWithConfig(middleware.TrailingSlashConfig{
 		RedirectCode: http.StatusMovedPermanently,
 	}))
