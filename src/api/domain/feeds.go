@@ -2,7 +2,8 @@ package domain
 
 import (
 	"api/database"
-	"log"
+	"errors"
+	"fmt"
 	"time"
 
 	"github.com/guregu/null"
@@ -18,7 +19,7 @@ type Feed struct {
 
 type Feeds []Feed
 
-func GetFeed(id string) *Feed {
+func GetFeed(id string) (Feed, error) {
 	db := database.GetDB()
 
 	var feed Feed
@@ -29,13 +30,15 @@ func GetFeed(id string) *Feed {
 	`, id)
 
 	if feed.ID == "" {
-		return nil
+		return feed, errors.New(
+			fmt.Sprintf("No feed with id %s found", id),
+		)
 	}
 
-	return &feed
+	return feed, nil
 }
 
-func GetAllFeeds(limit int, after string) *Feeds {
+func GetAllFeeds(limit int, after string) (Feeds, error) {
 	db := database.GetDB()
 
 	feeds := make(Feeds, 0, limit)
@@ -49,13 +52,13 @@ func GetAllFeeds(limit int, after string) *Feeds {
 	`, after, limit)
 
 	if err != nil {
-		log.Println(err)
+		return feeds, err
 	}
 
-	return &feeds
+	return feeds, nil
 }
 
-func CreateFeed(feed Feed) *Feed {
+func CreateFeed(feed Feed) (Feed, error) {
 	db := database.GetDB()
 
 	feed.ID = uuid.NewV4().String()

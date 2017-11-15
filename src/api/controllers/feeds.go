@@ -17,9 +17,9 @@ func MapFeedRoutes(e *echo.Echo) {
 }
 
 func getFeed(c echo.Context) error {
-	feed := domain.GetFeed(c.Param("id"))
+	feed, err := domain.GetFeed(c.Param("id"))
 
-	if feed == nil {
+	if err != nil {
 		return c.NoContent(http.StatusNotFound)
 	}
 
@@ -37,19 +37,25 @@ func getAllFeeds(c echo.Context) error {
 		limit = 50
 	}
 
-	feeds := domain.GetAllFeeds(limit, after)
+	feeds, err := domain.GetAllFeeds(limit, after)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
 
 	return c.JSON(http.StatusOK, feeds)
 }
 
 func addFeed(c echo.Context) (err error) {
-	var feed *domain.Feed
+	var feed domain.Feed
 
-	if err = c.Bind(feed); err != nil {
+	if err = c.Bind(&feed); err != nil {
 		return
 	}
 
-	feed = domain.CreateFeed(*feed)
+	newFeed, err := domain.CreateFeed(feed)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
 
-	return c.JSON(http.StatusCreated, feed)
+	return c.JSON(http.StatusCreated, newFeed)
 }
