@@ -8,6 +8,10 @@ services:
       context: .
       dockerfile: docker/app/Dockerfile
 
+    volumes:
+      - "./src/app/public:/go/src/app/public"
+      - "./src/app/resources:/go/src/app/resources"
+
     ports:
       - "8080:1234"
 

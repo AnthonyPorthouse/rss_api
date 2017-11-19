@@ -24,6 +24,8 @@ func main() {
 
 	e.Use(middleware.Logger())
 
+	e.Static("/", "public")
+
 	controllers.MapBaseRoutes(e)
 
 	e.Logger.Fatal(e.Start(":1234"))
