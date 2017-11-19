@@ -9,7 +9,7 @@
 <script>
   import Axios from 'axios';
 
-  import Feeds from './Feeds';
+  import Feeds from './Feeds.vue';
 
   export default {
     data: () => {

@@ -14,7 +14,7 @@
 
     methods: {
       getFeeds() {
-        Axios.get('/api/getFeeds')
+        Axios.get('http://api.rss.dev/feeds')
           .then((response) => {
             this.feeds = response.data;
           })

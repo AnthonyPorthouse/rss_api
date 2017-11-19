@@ -1,6 +1,15 @@
 version: "3.4"
 
 services:
+  proxy:
+    image: haproxy:alpine
+    volumes:
+      - "./docker/proxy:/usr/local/etc/haproxy:ro"
+
+    ports:
+      - "80:80"
+      - "443:443"
+
   app:
     image: anthonyporthouse/rss_app:latest
 
@@ -11,9 +20,6 @@ services:
     volumes:
       - "./src/app/public:/go/src/app/public"
       - "./src/app/resources:/go/src/app/resources"
-
-    ports:
-      - "8080:1234"
 
     restart: always
 
