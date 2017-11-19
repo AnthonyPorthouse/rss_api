@@ -1,4 +1,12 @@
 <template>
+  <div class="Feeds">
+
+    <div v-for="feed in feeds" :key="feed.id">
+      <h2>{{ feed.id }}</h2>
+      <p>{{ feed.url }}</p>
+    </div>
+
+  </div>
 
 </template>
 
