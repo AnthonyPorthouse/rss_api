@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Store from './store/store';
 
 import App from './components/App.vue';
 
@@ -8,5 +9,6 @@ new Vue({
 
   components: {
     app: App,
+    store: Store,
   },
 });
