@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:alpine as builder
 
 LABEL maintainer="Anthony Porthouse <anthony@porthou.se>"
 
@@ -10,8 +10,19 @@ COPY ./src/app /go/src/app
 
 RUN dep ensure --vendor-only
 RUN go install
+RUN CGO_ENABLED=0 GOOS=linux go build -o app .
+
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /app
+
+COPY --from=builder /go/src/app/app .
+COPY --from=builder /go/src/app/resources/templates /app/resources/templates
+COPY --from=builder /go/src/app/public .
 
 HEALTHCHECK --interval=5m --timeout=3s \
     CMD curl -f http://localhost:1234/status
 
-CMD ["go-wrapper", "run"]
+CMD ["./app"]

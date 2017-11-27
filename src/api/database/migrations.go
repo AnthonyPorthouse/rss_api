@@ -3,6 +3,8 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/mattes/migrate"
@@ -16,8 +18,19 @@ func MigrateDB() {
 		log.Panic(err)
 	}
 
+	ex, err := os.Executable()
+	if err != nil {
+		log.Panic(err)
+	}
+	dir := filepath.Dir(ex)
+
+	migrationPath := fmt.Sprintf(
+		"file://%s/migrations",
+		dir,
+	)
+
 	m, err := migrate.NewWithDatabaseInstance(
-		"file:///go/src/api/migrations",
+		migrationPath,
 		"mysql",
 		driver,
 	)

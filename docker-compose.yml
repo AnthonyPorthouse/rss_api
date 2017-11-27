@@ -18,8 +18,8 @@ services:
       dockerfile: docker/app/Dockerfile
 
     volumes:
-      - "./src/app/public:/go/src/app/public"
-      - "./src/app/resources:/go/src/app/resources"
+      - "./src/app/public:/app/public"
+      - "./src/app/resources:/app/resources"
 
     restart: always
 
