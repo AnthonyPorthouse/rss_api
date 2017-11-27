@@ -1,7 +1,7 @@
 <template>
   <div class="Feeds">
 
-    <div v-for="feed in feeds" :key="feed.id">
+    <div v-for="feed in getFeeds" :key="feed.id">
       <h2>{{ feed.id }}</h2>
       <p>{{ feed.url }}</p>
     </div>
@@ -11,30 +11,27 @@
 </template>
 
 <script>
-  import Axios from 'axios'
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     data() {
-      return {
-        'feeds': [],
-      }
+      return {};
+    },
+
+    computed: {
+      ...mapGetters([
+        'getFeeds',
+      ]),
     },
 
     methods: {
-      getFeeds() {
-        Axios.get('http://api.rss.dev/feeds')
-          .then((response) => {
-            this.feeds = response.data;
-          })
-          .catch((response) => {
-            this.feeds = [];
-            console.error(response.data);
-          });
-      }
+      ...mapActions([
+        'getAllFeeds',
+      ]),
     },
 
     beforeMount() {
-      this.getFeeds();
+      this.getAllFeeds();
     }
   }
 </script>
