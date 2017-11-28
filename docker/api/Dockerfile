@@ -6,8 +6,6 @@ WORKDIR /go/src/api
 COPY ./src/api /go/src/api
 
 RUN dep ensure --vendor-only
-RUN go install
-
 RUN CGO_ENABLED=0 GOOS=linux go build -o api .
 
 FROM alpine:latest

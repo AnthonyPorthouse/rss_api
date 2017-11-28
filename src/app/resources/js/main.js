@@ -1,6 +1,8 @@
 import Vue from 'vue';
-import Store from './store/store';
 
+import '../scss/app.scss';
+
+import Store from './store/store';
 import App from './components/App.vue';
 
 /* eslint-disable no-new */

@@ -9,7 +9,6 @@ WORKDIR /go/src/app
 COPY ./src/app /go/src/app
 
 RUN dep ensure --vendor-only
-RUN go install
 RUN CGO_ENABLED=0 GOOS=linux go build -o app .
 
 FROM alpine:latest
