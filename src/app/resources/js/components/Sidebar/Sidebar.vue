@@ -1,6 +1,13 @@
 <template>
-  <sidebar-list :list="getSidebar"></sidebar-list>
+  <sidebar-list class="Sidebar" :list="getSidebar"></sidebar-list>
 </template>
+
+<style lang="scss">
+  .Sidebar {
+    grid-column: 1 / span 3;
+  }
+
+</style>
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
