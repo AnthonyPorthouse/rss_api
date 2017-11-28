@@ -1,23 +1,24 @@
-import * as types from "../mutation-types";
+import * as types from '../mutation-types';
+import api from '../../api/api';
 
 const state = {
   items: [],
 };
 
 const getters = {
-  getItems: (state) => {
-    return state.items;
-  }
+  getSidebar: state => state.items,
 };
 
 const actions = {
   getSidebarItems({ commit }) {
-    commit(types.GET_SIDEBAR_ITEMS)
+    api.getSidebar((sidebar) => {
+      commit(types.SET_SIDEBAR, sidebar);
+    });
   },
 };
 
 const mutations = {
-  [types.GET_SIDEBAR_ITEMS] (state, { items }) {
+  [types.SET_SIDEBAR](state, items) {
     state.items = items;
   },
 };
