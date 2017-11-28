@@ -10,6 +10,7 @@
   import Axios from 'axios';
 
   import Feeds from './Feeds.vue';
+  import api from "../api/api";
 
   export default {
     data: () => {
@@ -26,10 +27,9 @@
 
     methods: {
       getStatus() {
-        Axios.get("/status")
-          .then((response) => {
-            this.status = response.data;
-          });
+        api.getStatus((status) => {
+          this.status = status;
+        })
       },
     },
 
