@@ -395,6 +395,10 @@ template {
   grid-gap: .5rem;
 }
 
+.Feeds {
+  grid-column: span 9;
+}
+
 .Sidebar {
   grid-column: 1 / span 3;
 }

@@ -7,8 +7,15 @@
     </div>
 
   </div>
-
 </template>
+
+<style lang="scss">
+
+  .Feeds {
+    grid-column: span 9;
+  }
+
+</style>
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
